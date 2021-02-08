@@ -6,8 +6,9 @@ Understanding the mineral composition of rocks is a very important topic for nea
 
 <figure>
   <p align="center">
-    <img src='/Images/ppltest.jpg' width="100" height="200">
-    <img src='/Images/xpltest.png' width="100" height="200"> 
+    <img src='/Images/ppltest.jpg' width="100" height="200" title="PPL Thin Section">
+    <img src='/Images/xpltest.png' width="100" height="200">
+    <img src='/Images/labels.png' width="100" height="200">
   <figcaption>Example of plain polarized light thin section</figcaption> </p>
 </figure>
 
