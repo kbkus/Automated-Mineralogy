@@ -5,6 +5,9 @@ import pandas as pd
 import tkinter as tk
 from PIL import Image, ImageTk
 import numpy as np
+import sys
+
+print(sys.version)
 
 
 
@@ -31,7 +34,7 @@ class NewFrame(tk.Frame):
 
     def getxy(self, canvas, event):
         self.canvas = canvas
-        self.pts.append((int(event.x*self.scaler), int(event.y*self.scaler)))
+        self.pts.append([int(event.x*self.scaler), int(event.y*self.scaler)])
         self.canvas.create_oval(event.x-4, event.y-4, event.x+4, event.y+4, fill='yellow')
         print("pxl location = ({0},{1})".format(int(event.x*self.scaler), int(event.y*self.scaler)))
 
@@ -59,7 +62,7 @@ class ExportButton(tk.Frame):
         data = {'ppl':frame1_pts,'xpl':frame2_pts, 'labels':frame3_pts}
 
         df = pd.DataFrame(data)
-        df.to_csv('homography_pts.csv', header=['ppl','xpl','labels'])
+        df.to_pickle('homography_pts.pkl')
 
 
 
