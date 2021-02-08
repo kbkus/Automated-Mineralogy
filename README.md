@@ -5,12 +5,9 @@ ML project to predict mineral maps from cross-polarized (XPL) and plain-polarize
 Understanding the mineral composition of rocks is a very important topic for nearly all fields of geology. Thin sections (0.03 mm thick slices of rock) are the primary way in which researchers are able to get detailed information regarding the composition, metamorphism, and paragenetic history of a rock sample. By viewing thin sections under different light polarizations, trained mineralogists can manually identify which grains are which minearls. 
 
 <figure>
-  <p align="center"> <img src='/Images/ppltest.jpg' width="100" height="200"> 
-  <figcaption>Example of plain polarized light thin section</figcaption> </p>
-</figure>
-
-<figure>
-  <p align="center"> <img src='/Images/xpltest.png' width="100" height="200"> 
+  <p align="center">
+    <img src='/Images/ppltest.jpg' width="100" height="200">
+    <img src='/Images/xpltest.png' width="100" height="200"> 
   <figcaption>Example of plain polarized light thin section</figcaption> </p>
 </figure>
 
