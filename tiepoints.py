@@ -7,10 +7,6 @@ from PIL import Image, ImageTk
 import numpy as np
 import sys
 
-print(sys.version)
-
-
-
 class NewFrame(tk.Frame):
     def __init__(self, row, col, img, master=None):
         self.parent = master
@@ -40,6 +36,9 @@ class NewFrame(tk.Frame):
 
     def get_pts(self):
         return self.pts
+    
+    def zoomin(self, canvas):
+        return
 
 class ExportButton(tk.Frame):
     def __init__(self, frame1, frame2, frame3, master=None):
@@ -63,8 +62,26 @@ class ExportButton(tk.Frame):
 
         df = pd.DataFrame(data)
         df.to_pickle('homography_pts.pkl')
+        
+class LoadButton(tk.Frame):
+    def __init__(self, frame1, frame2, frame3, master=None):
+        self.parent = master
+        self.frame1 = frame1
+        self.frame2 = frame2
+        self.frame3 = frame3
 
+        self.button = tk.Button(master, command=self.buttonClick, text='Load Points')
+        self.button.place(x=1550, y=200)
 
+    def buttonClick(self):
+        ''' handle button click event to export all of the stored
+        click coordinates'''
+        print('Loading points')
+        df = pd.read_pickle('homography_pts.pkl')
+        
+#         # iterate through each point loaded in and plot on proper frame
+#         for i in range(len(df)):
+            
 
 
 class MainWindow(tk.Frame):
@@ -110,14 +127,17 @@ def main(img1, img2, img3):
   
     root.mainloop()
 
-    list1 = mw.Frame1.get_pts()
-    list2 = mw.Frame2.get_pts()
-    list3 = mw.Frame3.get_pts()
+#     list1 = mw.Frame1.get_pts()
+#     list2 = mw.Frame2.get_pts()
+#     list3 = mw.Frame3.get_pts()
 
-    return list1, list2, list3
+    return 
 
-if __name__ == '__main__':
-    ppl = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/ppltest.jpg')
-    xpl = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/xpltest.png')
-    labels = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/EDF17-1.png')
-    main(ppl, xpl, labels)
+def get_tiepoints(ppl, xpl, labels):
+    return main(ppl, xpl, labels)
+
+# if __name__ == '__main__':
+#     ppl = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/ppltest.jpg')
+#     xpl = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/xpltest.png')
+#     labels = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/EDF17-1.png')
+#     main(ppl, xpl, labels)
