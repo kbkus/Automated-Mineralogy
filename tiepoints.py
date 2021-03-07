@@ -41,11 +41,12 @@ class NewFrame(tk.Frame):
         return
 
 class ExportButton(tk.Frame):
-    def __init__(self, frame1, frame2, frame3, master=None):
+    def __init__(self, frame1, frame2, frame3, save_path, master=None):
         self.parent = master
         self.frame1 = frame1
         self.frame2 = frame2
         self.frame3 = frame3
+        self.save_path = save_path
 
         self.button = tk.Button(master, command=self.buttonClick, text='Export Points')
         self.button.place(x=1550, y=400)
@@ -61,7 +62,7 @@ class ExportButton(tk.Frame):
         data = {'ppl':frame1_pts,'xpl':frame2_pts, 'labels':frame3_pts}
 
         df = pd.DataFrame(data)
-        df.to_pickle('homography_pts.pkl')
+        df.to_pickle(f'{self.save_path}homography_pts.pkl')
         
 class LoadButton(tk.Frame):
     def __init__(self, frame1, frame2, frame3, master=None):
@@ -85,11 +86,12 @@ class LoadButton(tk.Frame):
 
 
 class MainWindow(tk.Frame):
-    def __init__(self, img1, img2,img3, master=None):
+    def __init__(self, img1, img2,img3, save_path, master=None):
         self.parent = master
         self.img1 = img1
         self.img2 = img2
         self.img3 = img3
+        self.save_path = save_path
 
         tk.Frame.__init__(self, self.parent, bg='#ffffff')
 
@@ -106,7 +108,7 @@ class MainWindow(tk.Frame):
         self.Frame2 = NewFrame(0,1, self.img2, self.parent)
         self.Frame3 = NewFrame(0,2, self.img3, self.parent)
 
-        self.Button = ExportButton(self.Frame1, self.Frame2, self.Frame3)
+        self.Button = ExportButton(self.Frame1, self.Frame2, self.Frame3, self.save_path)
 
     def quit(self):
         print('quit button pressed')
@@ -114,7 +116,7 @@ class MainWindow(tk.Frame):
         
     
 
-def main(img1, img2, img3):
+def main(img1, img2, img3, save_path):
 
     root = tk.Tk()
     
@@ -123,7 +125,7 @@ def main(img1, img2, img3):
     # assign cursor appearance
     root.config(cursor="draft_small")
 
-    mw = MainWindow(img1, img2, img3, master=root)
+    mw = MainWindow(img1, img2, img3, save_path, master=root)
   
     root.mainloop()
 
@@ -133,8 +135,8 @@ def main(img1, img2, img3):
 
     return 
 
-def get_tiepoints(ppl, xpl, labels):
-    return main(ppl, xpl, labels)
+def get_tiepoints(ppl, xpl, labels, save_path):
+    return main(ppl, xpl, labels, save_path)
 
 # if __name__ == '__main__':
 #     ppl = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/ppltest.jpg')
