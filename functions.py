@@ -205,17 +205,17 @@ def align_images(df, ppl_img, xpl_img, labels_img, threshold=10, confidence=0.99
     labels_pts = np.array(df['labels'].tolist())
 
     # compute homography matrix between two sets of matched points
-    (xpl_H, xpl_mask) = cv2.findHomography(xpl_pts, ppl_pts, cv2.RANSAC, ransacReprojThreshold=threshold, confidence=confidence)
-    (labels_H, labels_mask) = cv2.findHomography(labels_pts, ppl_pts, cv2.RANSAC, ransacReprojThreshold=threshold, confidence=confidence)
+    (ppl_H, ppl_mask) = cv2.findHomography(ppl_pts, labels_pts, cv2.RANSAC, ransacReprojThreshold=threshold, confidence=confidence)
+    (xpl_H, xpl_mask) = cv2.findHomography(xpl_pts, labels_pts, cv2.RANSAC, ransacReprojThreshold=threshold, confidence=confidence)
     
     # use the homography matrix to align the images to the ppl img
+    (ppl_h, ppl_w) = labels_img.shape[:2]
+    ppl_aligned = cv2.warpPerspective(ppl_img, ppl_H, (ppl_w,ppl_h))
+    
     (xpl_h, xpl_w) = ppl_img.shape[:2]
     xpl_aligned = cv2.warpPerspective(xpl_img, xpl_H, (xpl_w,xpl_h))
     
-    (labels_h, labels_w) = ppl_img.shape[:2]
-    labels_aligned = cv2.warpPerspective(labels_img, labels_H, (labels_w,labels_h))
-    
-    ppl_aligned = ppl_img
+    labels_aligned = labels_img
 
     # resize both the aligned and template images so we can easily 
     # visualize them on the screen
@@ -238,19 +238,19 @@ def align_images(df, ppl_img, xpl_img, labels_img, threshold=10, confidence=0.99
     # aligned image on the template to get an idea of how good
     # the image alignment is
 
-    template = ppl_aligned.copy()
+    template = labels_aligned.copy()
+    ppl_overlay = ppl_aligned.copy()
     xpl_overlay = xpl_aligned.copy()
-    labels_overlay = labels_aligned.copy()
 
+    cv2.addWeighted(template, 0.5, ppl_overlay, 0.5, 0, ppl_overlay)
     cv2.addWeighted(template, 0.5, xpl_overlay, 0.5, 0, xpl_overlay)
-    cv2.addWeighted(template, 0.5, labels_overlay, 0.5, 0, labels_overlay)
 
+    cv2.addWeighted(template, 0.5, ppl, 0.5, 0, ppl)
     cv2.addWeighted(template, 0.5, xpl, 0.5, 0, xpl)
-    cv2.addWeighted(template, 0.5, labels, 0.5, 0, labels)
     
     # stack overlay imgs next to each other
-    overlays_stacked = np.hstack([xpl, labels])
-    aligned_overlays_stacked = np.hstack([xpl_overlay, labels_overlay])
+    overlays_stacked = np.hstack([ppl, xpl])
+    aligned_overlays_stacked = np.hstack([ppl_overlay, xpl_overlay])
 
     # show the two output inmage alignment visualizations
     plt.figure(figsize=(30,20))
