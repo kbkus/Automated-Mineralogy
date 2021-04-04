@@ -10,7 +10,7 @@ from sklearn.cluster import KMeans
 import imutils
 from min_dict import MINERALS
 
-def sample_img(df, ppl, xpl, labels, width = 200, height = 200, inc = 75, status = False):
+def sample_img(df, ppl, xpl, labels, width = 150, height = 150, inc = 75, status = False):
     '''
     Function samples image and stores RGB and greyscale color channels in dataframe.
     Assumed ppl and xpl images are the same size.
@@ -18,6 +18,7 @@ def sample_img(df, ppl, xpl, labels, width = 200, height = 200, inc = 75, status
     width = width
     height = height
     inc = inc
+    columns = df.columns
     
     # convert images to Image type
     if type(ppl) == np.ndarray:
@@ -43,7 +44,7 @@ def sample_img(df, ppl, xpl, labels, width = 200, height = 200, inc = 75, status
                    'topbottom': Image.FLIP_TOP_BOTTOM}
     
     print(f'{yi} rows and {xi} columns to slice.')
-    print(f'Total observations: {yi*xi*12}')
+    print(f'Total observations: {yi*xi*8}')
     
     # iterate through each sliding window along the height of the image
     start = time.time()
@@ -51,17 +52,17 @@ def sample_img(df, ppl, xpl, labels, width = 200, height = 200, inc = 75, status
         for x in np.arange(xi):
             
             # select orientation of image
-            for orientation in [0, 1, 2]:
+            for orientation in [0, 1]:
                 if orientation == 0:
                     # isolate a crop of the original images
                     ppl_slice = ppl.crop(topleft+botright)
                     xpl_slice = xpl.crop(topleft+botright)
                     labels_slice = labels.crop(topleft+botright)
-                elif orientation == 1:
-                    # isolate a crop of the original images
-                    ppl_slice = ppl.crop(topleft+botright).transpose(Image.FLIP_LEFT_RIGHT)
-                    xpl_slice = xpl.crop(topleft+botright).transpose(Image.FLIP_LEFT_RIGHT)
-                    labels_slice = labels.crop(topleft+botright).transpose(Image.FLIP_LEFT_RIGHT)
+                # elif orientation == 1:
+                #     # isolate a crop of the original images
+                #     ppl_slice = ppl.crop(topleft+botright).transpose(Image.FLIP_LEFT_RIGHT)
+                #     xpl_slice = xpl.crop(topleft+botright).transpose(Image.FLIP_LEFT_RIGHT)
+                #     labels_slice = labels.crop(topleft+botright).transpose(Image.FLIP_LEFT_RIGHT)
                 else:
                     # isolate a crop of the original images
                     ppl_slice = ppl.crop(topleft+botright).transpose(Image.FLIP_TOP_BOTTOM)
