@@ -5,7 +5,7 @@ from keras_segmentation.models.model_utils import get_segmentation_model
 from keras_segmentation.models.unet import vgg_unet
 from keras_segmentation.predict import predict
 import os
-from config import imshape, n_classes
+from config import imshape, n_classes, n_epochs
 
 def model_orig(pretrained=False):
 
@@ -50,7 +50,7 @@ def model_orig(pretrained=False):
     model.train(
         train_images = '../dataset/ppl_train_images/',
         train_annotations = '../dataset/train_segmentation/',
-        epochs = 1)
+        epochs = n_epochs)
     
     model.summary()
     

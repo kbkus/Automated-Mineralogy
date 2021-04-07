@@ -15,3 +15,6 @@ logbase = 'logs'
 
 # classes are defined as 0 through 6 (7 total)
 n_classes = 7
+
+# number of epochs
+n_epochs = 2
