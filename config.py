@@ -18,3 +18,14 @@ n_classes = 7
 
 # number of epochs
 n_epochs = 2
+
+# Config variables for resize.py and tiepoints.py
+
+# paths for original images
+ppl_path = '/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/mn16-07-ppl.jpg'
+xpl_path = '/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/mn16-07-cpl.jpg'
+labels_path = '/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/MN16-07.png'
+
+# path to save tiepoints and resize points pkl files
+resize_pts_path = '/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Data/mn1607_resize_pts.pkl'
+tiepoints_path = '/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Data/mn1607_tiepoints.pkl'

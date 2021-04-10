@@ -6,6 +6,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import numpy as np
 import sys
+from config import ppl_path, xpl_path, labels_path, resize_pts_path
 
 print(sys.version)
 
@@ -62,7 +63,7 @@ class ExportButton(tk.Frame):
         data = {'ppl':frame1_pts,'xpl':frame2_pts, 'labels':frame3_pts}
 
         df = pd.DataFrame(data)
-        df.to_pickle('resize_pts.pkl')
+        df.to_pickle(resize_pts_path)
 
 
 
@@ -117,7 +118,7 @@ def main(img1, img2, img3):
     return list1, list2, list3
 
 if __name__ == '__main__':
-    ppl = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/EDF-17-1-PPL.jpg')
-    xpl = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/EDF-17-1-CPL.jpg')
-    labels = Image.open('/Users/kacikus/Dropbox/AutomatedMineralogy_Project/Automated-Mineralogy/Images/EDF17-1.png')
+    ppl = Image.open(ppl_path)
+    xpl = Image.open(xpl_path)
+    labels = Image.open(labels_path)
     main(ppl, xpl, labels)
