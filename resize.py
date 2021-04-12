@@ -10,7 +10,7 @@ from config import ppl_path, xpl_path, labels_path, resize_pts_path
 
 print(sys.version)
 
-
+# select top left and bottom right points on each image
 
 class NewFrame(tk.Frame):
     def __init__(self, row, col, img, master=None):

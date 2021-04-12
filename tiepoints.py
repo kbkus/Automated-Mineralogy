@@ -6,6 +6,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import numpy as np
 import sys
+from config import tiepoints_path
 
 class NewFrame(tk.Frame):
     def __init__(self, row, col, img, master=None):
@@ -78,7 +79,7 @@ class LoadButton(tk.Frame):
         ''' handle button click event to export all of the stored
         click coordinates'''
         print('Loading points')
-        df = pd.read_pickle('homography_pts.pkl')
+        df = pd.read_pickle(tiepoints_path)
         
 #         # iterate through each point loaded in and plot on proper frame
 #         for i in range(len(df)):

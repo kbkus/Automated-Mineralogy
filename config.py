@@ -17,7 +17,7 @@ logbase = 'logs'
 n_classes = 7
 
 # number of epochs
-n_epochs = 2
+n_epochs = 1
 
 # Config variables for resize.py and tiepoints.py
 
