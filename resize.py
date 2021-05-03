@@ -8,8 +8,6 @@ import numpy as np
 import sys
 from config import ppl_path, xpl_path, labels_path, resize_pts_path
 
-print(sys.version)
-
 # select top left and bottom right points on each image
 
 class NewFrame(tk.Frame):
